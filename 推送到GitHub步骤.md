@@ -22,48 +22,69 @@
 
 打开 PowerShell，执行：
 
+> **状态：本作业已经推送完成**，下面的第 1、2 步留作以后改代码时参考。
+
 ```powershell
 cd "C:\Users\yangxin\Desktop\JavaWeb-Homework2-杨鑫-25040500"
-git push -u origin main
+git add -A
+git commit -m "说明这次改了什么"
+git push
 ```
 
-会弹出 GitHub 登录窗口（浏览器或凭据管理器）：
+（首次推送才需要 `git push -u origin main` 来设置上游分支，已经设置过了，以后直接 `git push`。）
 
-- **推荐**：弹出浏览器后点授权即可（Git for Windows 自带的 Git Credential Manager）
-- 如果要求输入用户名密码：用户名填 `nsdd18`，
-  密码**不能填 GitHub 登录密码**，必须填 **Personal Access Token**
-  （生成地址：<https://github.com/settings/tokens> → Generate new token (classic) → 勾选 `repo` → 生成后复制）
+### ⚠️ 本机特有的 TLS 问题及解决办法（重要）
 
-### ⚠️ 如果报 TLS / SSL 错误（本机特有，已提前配好）
+本机装了 **Steam++（Watt Toolkit）** 做 GitHub 加速，它在 hosts 里把 `github.com` 等
+**25 个域名**都指向了 `127.0.0.1` 走本地代理。
 
-本机装了 **Steam++（Watt Toolkit）** 做 GitHub 加速，它把 `github.com` 等域名在 hosts 里
-指向了 `127.0.0.1` 走本地代理。用手写链接去连它时，Windows 的 schannel 会因为
-"无法查询证书吊销状态"而报错：
+Git 默认用 Windows 的 TLS 后端（schannel），连这个本地代理时会因为
+"无法查询证书吊销状态"直接失败：
 
 ```
 schannel: next InitializeSecurityContext failed: CRYPT_E_NO_REVOCATION_CHECK (0x80092012)
 ```
 
-**已经为你配好了**：本仓库的 `.git/config` 里加了一条 `http.curloptResolve`，
-让 git 直接连 GitHub 的真实 IP，绕过本地代理，TLS 校验保持完整：
+我实测了几种方案（每种连打 6 次）：
+
+| 方案 | 成功率 | 说明 |
+| --- | --- | --- |
+| 默认（走代理，schannel） | 0/6 | 报上面的错 |
+| `http.sslVerify=false` | 6/6 | 能用，但**关掉了证书校验**，不推荐 |
+| 走代理 + 只加信任 SteamTools 证书 | 0/6 | schannel 依然卡在吊销检查 |
+| **openssl 后端 + 信任 SteamTools 证书** | 6/6 | 校验保持开启（备选方案） |
+| **直连 GitHub 真实 IP** | 6/6 | 校验保持开启（当前采用） |
+
+**当前采用**：本仓库 `.git/config` 里配了一条 `http.curloptResolve`，
+让 git 绕过本地代理直连 GitHub 真实 IP，TLS 校验完整保留：
 
 ```bash
 git config --local http.curloptResolve github.com:443:20.205.243.166
 ```
 
-注意这是**仓库级**配置，不影响你其他项目的 git；也没有去动全局的
-`http.schannelCheckRevoke`（那会削弱所有 HTTPS 仓库的安全性）。
+这是**仓库级**配置，不影响你其他项目；也没有去改全局的 `http.sslVerify`。
 
-如果哪天 GitHub 换了 IP 导致又连不上，用下面两行更新即可：
+**如果哪天又连不上**（GitHub 换 IP 了），先试备选方案：
 
 ```powershell
-# 查当前真实 IP（注意要用 8.8.8.8 查，本机 hosts 被加速工具改了）
+cd "C:\Users\yangxin\Desktop\JavaWeb-Homework2-杨鑫-25040500"
+git config --local http.sslBackend openssl
+git config --local http.sslCAInfo "C:\Users\yangxin\.git-certs\steamtools-ca.pem"
+```
+
+或者更新直连 IP：
+
+```powershell
+# 注意要用 8.8.8.8 查询，因为本机 hosts 被加速工具改成了 127.0.0.1
 (Resolve-DnsName github.com -Server 8.8.8.8 -Type A).IPAddress
-# 用查到的 IP 更新配置
 git config --local http.curloptResolve "github.com:443:查到的IP"
 ```
 
-另一种做法是关闭 Steam++ 的 GitHub 加速再推送（但国内直连可能不稳定）。
+> 说明：Steam++ 的根证书（`CN=SteamTools Certificate`）已经装在系统证书库里，
+> 上面用到的 `steamtools-ca.pem` 就是从系统证书库导出到 `C:\Users\yangxin\.git-certs\` 的。
+> 如果哪天重装了 Steam++，这个证书会变，需要重新导出。
+
+如果你不想用加速工具，关闭 Steam++ 的 GitHub 加速后 git 也能直连（但国内可能不稳定）。
 
 ## 第 3 步：确认
 
