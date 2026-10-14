@@ -1,11 +1,13 @@
 # 软件2501班 第二次作业 —— 登录 / 注册 / 忘记密码
 
 > **题目**：① 完成登录页面、注册页面、忘记密码三个前端页面；② 完成处理登录页面、注册页面、忘记密码三个页面对应的 Servlet；③ 项目代码托管使用 git；④ 作业提交 git 仓库即可。
+>
+> **小组成员**：杨鑫（25040500）、冉铭（25040566）
 
 | 项目 | 内容 |
 | --- | --- |
-| 姓名 | 杨鑫 |
-| 学号 | 25040500 |
+| 姓名 / 学号 | 杨鑫 / 25040500　　（GitHub：[@nsdd18](https://github.com/nsdd18)） |
+| 姓名 / 学号 | 冉铭 / 25040566　　（GitHub：[@rm632](https://github.com/rm632)） |
 | 班级 | 软件2501班 |
 | 开发工具 | IntelliJ IDEA 2025.3 (Ultimate) |
 | 构建工具 | Maven 3.9.9 |
@@ -24,8 +26,19 @@
 git clone https://github.com/nsdd18/javaweb-homework2-userauth.git
 ```
 
-本地项目目录：`JavaWeb-Homework2-杨鑫-25040500`
+本地项目目录：`JavaWeb-Homework2-杨鑫-冉铭-25040500`
 GitHub 仓库名：`javaweb-homework2-userauth`（仓库名用英文，避免中文路径在部分工具下出问题；文件夹名仍按要求保留中文）
+
+**小组成员与分工**：
+
+| 成员 | 学号 | GitHub | 在本仓库中的贡献 |
+| --- | --- | --- | --- |
+| 杨鑫 | 25040500 | [@nsdd18](https://github.com/nsdd18) | 提交作者，负责项目搭建、Servlet 与数据库层、页面与测试 |
+| 冉铭 | 25040566 | [@rm632](https://github.com/rm632) | 共同作者（Co-authored-by），参与页面实现与联调；已加入为仓库协作者 |
+
+> 仓库中每个提交都带有共同作者署名 `Co-authored-by: 冉铭 <342280719+rm632@users.noreply.github.com>`，
+> GitHub 会据此把冉铭记为参与者。
+
 
 ---
 
