@@ -34,6 +34,37 @@ git push -u origin main
   密码**不能填 GitHub 登录密码**，必须填 **Personal Access Token**
   （生成地址：<https://github.com/settings/tokens> → Generate new token (classic) → 勾选 `repo` → 生成后复制）
 
+### ⚠️ 如果报 TLS / SSL 错误（本机特有，已提前配好）
+
+本机装了 **Steam++（Watt Toolkit）** 做 GitHub 加速，它把 `github.com` 等域名在 hosts 里
+指向了 `127.0.0.1` 走本地代理。用手写链接去连它时，Windows 的 schannel 会因为
+"无法查询证书吊销状态"而报错：
+
+```
+schannel: next InitializeSecurityContext failed: CRYPT_E_NO_REVOCATION_CHECK (0x80092012)
+```
+
+**已经为你配好了**：本仓库的 `.git/config` 里加了一条 `http.curloptResolve`，
+让 git 直接连 GitHub 的真实 IP，绕过本地代理，TLS 校验保持完整：
+
+```bash
+git config --local http.curloptResolve github.com:443:20.205.243.166
+```
+
+注意这是**仓库级**配置，不影响你其他项目的 git；也没有去动全局的
+`http.schannelCheckRevoke`（那会削弱所有 HTTPS 仓库的安全性）。
+
+如果哪天 GitHub 换了 IP 导致又连不上，用下面两行更新即可：
+
+```powershell
+# 查当前真实 IP（注意要用 8.8.8.8 查，本机 hosts 被加速工具改了）
+(Resolve-DnsName github.com -Server 8.8.8.8 -Type A).IPAddress
+# 用查到的 IP 更新配置
+git config --local http.curloptResolve "github.com:443:查到的IP"
+```
+
+另一种做法是关闭 Steam++ 的 GitHub 加速再推送（但国内直连可能不稳定）。
+
 ## 第 3 步：确认
 
 推送成功后打开 <https://github.com/nsdd18/javaweb-homework2-userauth>
