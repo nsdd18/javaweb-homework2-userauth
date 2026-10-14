@@ -21,7 +21,7 @@ out/
 Thumbs.db
 .DS_Store
 
-# ---------- 本地环境相关 ----------
-# 如果你本机的数据库账号密码和 db.properties 里不同，
-# 建议新建 src/main/resources/db.local.properties 存放，此文件不会被提交
+# ---------- 本地数据库配置 ----------
+# 本机数据库密码与 db.properties 不同时，新建 db.local.properties 覆盖其中的项，
+# DbUtil 会自动读取它；该文件不进版本库，避免把个人数据库密码提交上去
 src/main/resources/db.local.properties
