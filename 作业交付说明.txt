@@ -1,0 +1,41 @@
+软件2501班 第二次作业 —— 提交信息
+============================================================
+
+提交仓库地址（填到作业提交框即可）：
+https://github.com/nsdd18/javaweb-homework2-userauth
+
+小组成员：
+    杨鑫    学号 25040500    GitHub: https://github.com/nsdd18
+    冉铭    学号 25040566    GitHub: https://github.com/rm632
+
+完成情况（对应题目四条要求）：
+    1. 登录页面、注册页面、忘记密码三个前端页面
+       -> src/main/webapp/login.jsp、register.jsp、forgot.jsp
+    2. 三个页面对应的 Servlet
+       -> LoginServlet(/login)、RegisterServlet(/register)、
+          ForgotPasswordServlet(/forgot)，另有 LogoutServlet(/logout)
+    3. 项目代码托管使用 git
+       -> 每个提交均带共同作者署名 Co-authored-by: 冉铭 <...>
+          冉铭已加入为仓库协作者（write 权限）
+    4. 作业提交 git 仓库即可
+       -> 仓库地址见上
+
+技术栈：
+    Maven 3.9.9 + JDK 17 + Jakarta Servlet 6.0 + Tomcat 10.1.33 + MySQL 8.0.12
+    数据表：javaweb_homework.user（密码以「随机盐 + SHA-256」哈希存储，不存明文）
+
+运行方式：
+    1. 执行 init_database.sql 建库建表（库名 javaweb_homework）
+    2. IDEA 配置 Tomcat 10，Application context 填 /homework2
+    3. 浏览器访问 http://localhost:8080/homework2/
+
+截图清单（运行截图/ 目录）：
+    1-登录页面.png              前端页面一：登录
+    2-注册页面.png              前端页面二：注册
+    3-忘记密码-第一步.png        前端页面三：忘记密码（验证身份）
+    4-注册成功.png              注册成功，数据写入 MySQL
+    5-登录失败提示.png          密码错误的提示与用户名回填
+    6-登录成功.png              登录成功
+    7-忘记密码-第二步.png        验证通过后设置新密码
+    8-密码重置成功.png          密码重置成功，新密码可登录
+    作业截图总览.png            上述 8 张的总览图（可直接交这张）

@@ -4,7 +4,7 @@
     ============================================================
     前端页面三：忘记密码页面（分两步：① 验证身份 ② 设置新密码）
     对应 Servlet：com.yangxin.servlet.ForgotPasswordServlet（/forgot）
-    姓名：杨鑫    学号：25040500
+    姓名：杨鑫 25040500　冉铭 25040566
     ============================================================
 --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -26,7 +26,7 @@
 <!-- 顶部标题 -->
 <div class="container page-header text-center">
     <h1>忘记密码</h1>
-    <p>软件2501班 第二次作业　姓名：杨鑫　学号：25040500</p>
+    <p>软件2501班 第二次作业　杨鑫 25040500　冉铭 25040566</p>
 </div>
 
 <!-- 忘记密码表单 -->
@@ -132,7 +132,7 @@
 
 <div class="page-footer">
     <p class="mb-1">JavaWeb 登录 / 注册 / 忘记密码 —— Servlet + MySQL 实现</p>
-    <p class="mb-0">软件2501班　杨鑫　25040500</p>
+    <p class="mb-0">软件2501班　杨鑫 25040500　冉铭 25040566</p>
 </div>
 
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>

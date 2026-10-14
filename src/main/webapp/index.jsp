@@ -3,7 +3,7 @@
 <%--
     ============================================================
     项目首页：三个页面的入口导航
-    姓名：杨鑫    学号：25040500
+    姓名：杨鑫 25040500　冉铭 25040566
     ============================================================
 --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -22,7 +22,7 @@
 
 <div class="container page-header text-center">
     <h1>JavaWeb 作业二：登录 / 注册 / 忘记密码</h1>
-    <p>软件2501班　姓名：杨鑫　学号：25040500</p>
+    <p>软件2501班　杨鑫 25040500　冉铭 25040566</p>
 </div>
 
 <div class="container pb-4" style="max-width: 720px;">
@@ -88,7 +88,7 @@
 
 <div class="page-footer">
     <p class="mb-1">开发环境：IntelliJ IDEA + Maven 3.9.9 + JDK 17 + Tomcat 10.1.33 + MySQL 8.0</p>
-    <p class="mb-0">软件2501班　杨鑫　25040500</p>
+    <p class="mb-0">软件2501班　杨鑫 25040500　冉铭 25040566</p>
 </div>
 
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
