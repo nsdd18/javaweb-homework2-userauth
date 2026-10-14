@@ -4,7 +4,7 @@
     ============================================================
     前端页面一：登录页面
     对应 Servlet：com.yangxin.servlet.LoginServlet（/login）
-    姓名：杨鑫    学号：25040500
+    姓名：杨鑫 25040500　冉铭 25040566
     ============================================================
 --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -24,7 +24,7 @@
 <!-- 顶部标题 -->
 <div class="container page-header text-center">
     <h1>用户登录</h1>
-    <p>软件2501班 第二次作业　姓名：杨鑫　学号：25040500</p>
+    <p>软件2501班 第二次作业　杨鑫 25040500　冉铭 25040566</p>
 </div>
 
 <!-- 登录表单 -->
@@ -90,8 +90,8 @@
 </div>
 
 <div class="page-footer">
-    <p class="mb-1">JavaWeb 登录 / 注册 / 忘记密码 —— Servlet + MySQL 实现</p>
-    <p class="mb-0">软件2501班　杨鑫　25040500</p>
+    <p class="mb-1">软件2501班　杨鑫 25040500　冉铭 25040566</p>
+    <p class="mb-0">JavaWeb 登录 / 注册 / 忘记密码 —— Servlet + MySQL 实现</p>
 </div>
 
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
