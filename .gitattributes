@@ -1,0 +1,20 @@
+# ---------- 换行符统一 ----------
+# 仓库里所有文本文件统一用 LF 存储，检出时由 Git 按各人系统处理。
+# 这样无论谁 clone 下来，Java 源码、JSP、SQL 都不会因为换行符差异产生整个文件的假改动。
+* text=auto eol=lf
+
+# ---------- 明确二进制文件，禁止做换行符转换 ----------
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.jar  binary
+
+# ---------- GitHub 语言统计：把 JSP 和 CSS 正确归类 ----------
+*.jsp  text linguist-language=Java
+*.css  text
+*.sql  text

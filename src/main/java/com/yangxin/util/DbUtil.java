@@ -22,6 +22,9 @@ public final class DbUtil {
     /** 配置文件里的键名 */
     private static final String CONFIG_FILE = "db.properties";
 
+    /** 可选的本地覆盖配置文件（已被 .gitignore 排除，不进版本库） */
+    private static final String LOCAL_CONFIG_FILE = "db.local.properties";
+
     /** JDBC 连接串 */
     private static String url;
     /** 数据库用户名 */
@@ -38,19 +41,24 @@ public final class DbUtil {
 
     /**
      * 读取类路径下的 db.properties，并注册 JDBC 驱动。
+     *
+     * <p>如果同时存在 {@code db.local.properties}（本机专用配置，不进 git），
+     * 会在 db.properties 的基础上覆盖同名键，方便每个同学使用自己的数据库密码，
+     * 而不必修改要走版本控制的 db.properties。</p>
      */
     private static synchronized void init() {
         if (initialized) {
             return;
         }
-        try (InputStream in = DbUtil.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
-            if (in == null) {
-                throw new IllegalStateException("找不到配置文件：" + CONFIG_FILE);
-            }
-            Properties props = new Properties();
-            // ★ 必须用 UTF-8 读取，否则中文注释类配置会乱码
-            props.load(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8));
+        Properties props = loadProperties(CONFIG_FILE, true);
 
+        // 可选的本地覆盖配置，存在才加载
+        Properties local = loadProperties(LOCAL_CONFIG_FILE, false);
+        if (local != null) {
+            props.putAll(local);
+        }
+
+        try {
             String driver = props.getProperty("db.driver", "com.mysql.cj.jdbc.Driver");
             url = props.getProperty("db.url");
             username = props.getProperty("db.username");
@@ -60,8 +68,32 @@ public final class DbUtil {
             Class.forName(driver);
 
             initialized = true;
-        } catch (IOException | ClassNotFoundException e) {
-            throw new ExceptionInInitializerError("数据库初始化失败：" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new ExceptionInInitializerError("数据库驱动加载失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 从类路径读取一个 properties 文件。
+     *
+     * @param fileName 文件名（位于 src/main/resources 下）
+     * @param required 为 true 时文件不存在会抛异常；为 false 时返回 null
+     * @return 配置对象；可选文件不存在时返回 null
+     */
+    private static Properties loadProperties(String fileName, boolean required) {
+        try (InputStream in = DbUtil.class.getClassLoader().getResourceAsStream(fileName)) {
+            if (in == null) {
+                if (required) {
+                    throw new IllegalStateException("找不到配置文件：" + fileName);
+                }
+                return null;
+            }
+            Properties props = new Properties();
+            // ★ 必须用 UTF-8 读取，否则中文注释类配置会乱码
+            props.load(new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8));
+            return props;
+        } catch (IOException e) {
+            throw new ExceptionInInitializerError("读取配置文件失败：" + fileName + "，" + e.getMessage());
         }
     }
 

@@ -35,7 +35,9 @@ GitHub 仓库名：`javaweb-homework2-userauth`（仓库名用英文，避免中
 JavaWeb-Homework2-杨鑫-25040500
 ├── pom.xml                                  # Maven 配置（war 打包）
 ├── init_database.sql                        # ★ 建库、建表、建账号脚本
+├── .gitignore / .gitattributes              # git 忽略规则 / 换行符统一为 LF
 ├── README.md                                # 本说明文档
+├── 推送到GitHub步骤.md                       # 提交本作业到 GitHub 的步骤
 ├── 运行截图/                                 # 三个页面与运行结果截图
 └── src/main
     ├── java/com/yangxin
@@ -109,6 +111,15 @@ db.password=javaweb123
 
 > ⚠️ 踩坑记录：`characterEncoding` 必须写 `UTF-8`。如果写成 `utf8mb4`，
 > MySQL Connector/J 会抛 `Unsupported character encoding 'utf8mb4'` 异常。
+
+**本机密码不一样怎么办**：不要去改 `db.properties`（它要进 git），
+在同目录新建 `db.local.properties` 覆盖需要的键即可，`DbUtil` 会自动读取它，
+该文件已被 `.gitignore` 排除：
+
+```properties
+db.username=root
+db.password=你的密码
+```
 
 ## 四、在 IDEA 中运行
 
