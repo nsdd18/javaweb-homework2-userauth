@@ -14,6 +14,18 @@
 | 数据库 | MySQL 8.0.12 |
 | Servlet 规范 | Jakarta Servlet 6.0（Tomcat 10 的包名为 `jakarta.servlet.*`） |
 | 访问地址 | <http://localhost:8080/homework2/> |
+| 代码仓库 | <https://github.com/nsdd18/javaweb-homework2-userauth> |
+
+---
+
+## 〇、作业提交信息（git 仓库）
+
+```bash
+git clone https://github.com/nsdd18/javaweb-homework2-userauth.git
+```
+
+本地项目目录：`JavaWeb-Homework2-杨鑫-25040500`
+GitHub 仓库名：`javaweb-homework2-userauth`（仓库名用英文，避免中文路径在部分工具下出问题；文件夹名仍按要求保留中文）
 
 ---
 
