@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+/* ============================================================
+   软件2501班 第二次作业 —— 登录 / 注册 / 忘记密码 三个页面的公共样式
+   姓名：杨鑫    学号：25040500
+   （只有三个页面共用的个性化样式，其余交给 Bootstrap 5.3）
+   ============================================================ */
+
+body {
+    /* 渐变背景，让登录卡片更突出 */
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #e7f0ff 0%, #f7fbff 45%, #eaf7f1 100%);
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB",
+                 "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- 顶部标题栏 ---------- */
+.page-header {
+    padding: 22px 0 10px;
+}
+
+.page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f3a68;
+    margin-bottom: .25rem;
+}
+
+.page-header p {
+    color: #6c7a90;
+    margin-bottom: 0;
+}
+
+/* ---------- 表单卡片 ---------- */
+.auth-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 .5rem 1.5rem rgba(31, 58, 104, .12);
+    overflow: hidden;
+}
+
+.auth-card .card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #eef2f7;
+    padding: 1.1rem 1.25rem;
+}
+
+.auth-card .card-header .nav-link {
+    color: #6c7a90;
+    font-weight: 600;
+    border-radius: .5rem;
+    padding: .35rem .9rem;
+}
+
+.auth-card .card-header .nav-link.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.auth-card .card-body {
+    padding: 1.5rem 1.5rem 1.25rem;
+}
+
+/* ---------- 表单控件 ---------- */
+.form-label {
+    font-weight: 600;
+    color: #33415c;
+    font-size: .92rem;
+}
+
+.form-control {
+    padding: .6rem .85rem;
+    border-radius: .5rem;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .12);
+}
+
+.form-text {
+    font-size: .8rem;
+}
+
+/* 提交按钮 */
+.btn-submit {
+    padding: .65rem 1rem;
+    font-weight: 600;
+    border-radius: .5rem;
+}
+
+/* ---------- 底部信息 ---------- */
+.page-footer {
+    margin-top: auto;
+    padding: 18px 0;
+    text-align: center;
+    font-size: .82rem;
+    color: #8894a8;
+}
+
+/* ---------- 小屏适配 ---------- */
+@media (max-width: 575.98px) {
+    .page-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .auth-card .card-body {
+        padding: 1.25rem 1rem;
+    }
+}
